@@ -189,6 +189,7 @@ class Parameter implements Touchable {
 
   void touchSlide(Contact c) { }
 
+  void doubleTouch(Contact c) { }
 
   void _showParameterDialog(int x, int y) {
     DivElement backdrop = new DivElement() .. className = "backdrop";

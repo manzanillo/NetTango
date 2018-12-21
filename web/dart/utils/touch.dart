@@ -75,6 +75,8 @@ class TouchManager {
       element.onMouseUp.listen((e) => _mouseUp(e));
       element.onMouseMove.listen((e) => _mouseMove(e));
     //}
+    element.onDoubleClick.listen((e) => _mouseDoubleClick(e));
+
 /*
     element.onTouchStart.listen((e) => _touchDown(e));
     element.onTouchMove.listen((e) => _touchDrag(e));
@@ -131,6 +133,15 @@ class TouchManager {
           target.touchSlide(t);
         }
       }
+    }
+  }
+
+
+  void _mouseDoubleClick(MouseEvent evt) {
+    Contact c = new Contact.fromMouse(evt);
+    TouchBinding target = findTouchTarget(c);
+    if (target != null) {
+      target.doubleTouch(c);
     }
   }
 
@@ -373,6 +384,11 @@ class TouchBinding {
     layer.transformContact(c);
     touchable.touchSlide(c);
   }
+
+  void doubleTouch(Contact c) {
+    layer.transformContact(c);
+    touchable.doubleTouch(c);
+  }
 }
 
 
@@ -395,6 +411,8 @@ abstract class Touchable {
 
   // This gets fired when an unbound touch events slides over an object
   void touchSlide(Contact event) { }
+
+  void doubleTouch(Contact event) { }
 }
 
 
